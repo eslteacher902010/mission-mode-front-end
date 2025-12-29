@@ -1,0 +1,108 @@
+import { use, useEffect } from 'react';
+import * as Notifications from 'expo-notifications';
+
+const useDailyNotification = () => {
+
+  const scheduleNotification = async () => {
+    useEffect(() => {
+    if(!user) return;
+    }, [user]);
+
+    try {
+      await Notifications.scheduleNotificationAsync({
+        identifier: 'daily-reminder-in',
+        content: {
+          title: 'Waktu absen telah tiba!',
+          body: '10 menit lagi waktu absen masuk dimulai.',
+          categoryIdentifier: 'DAILY_REMINDER',
+        },
+        trigger: {
+          type: Notifications.SchedulableTriggerInputTypes.DAILY,
+          hour: 17,
+          minute: 19,
+          repeats: true,
+        },
+      });
+    } catch (error) {
+      console.error('Error scheduling daily notification:', error);
+    }
+  };
+
+  const scheduleSnoozeNotification = async () => {
+    try {
+      const snoozeTime = new Date();
+      snoozeTime.setHours(snoozeTime.getHours() + 2);
+
+      await Notifications.scheduleNotificationAsync({
+        content: {
+          title: 'Title (Snoozed)',
+          body: 'Body.',
+          sound: true,
+          categoryIdentifier: 'DAILY_REMINDER',
+        },
+        trigger: {
+          date: snoozeTime,
+        },
+      });
+
+      console.log('Snooze notification scheduled for 2 hours from now');
+    } catch (error) {
+      console.error('Error scheduling snooze notification:', error);
+    }
+  };
+
+  const handleNotificationResponse = async (response) => {
+    if (response.actionIdentifier === 'SNOOZE_ACTION') {
+      await scheduleSnoozeNotification();
+    }
+  };
+
+  useEffect(() => {
+    let subscription;
+
+    const setupNotifications = async () => {
+      try {
+        const { status } = await Notifications.requestPermissionsAsync({
+          ios: {
+            allowAlert: true,
+            allowBadge: true,
+            allowSound: true,
+          },
+        });
+
+        if (status !== 'granted') {
+          console.warn('Notification permissions not granted');
+          return;
+        }
+
+        await Notifications.cancelAllScheduledNotificationsAsync();
+
+        await Notifications.setNotificationCategoryAsync('DAILY_REMINDER', [
+          {
+            identifier: 'SNOOZE_ACTION',
+            buttonTitle: 'Snooze 2 hours',
+          },
+        ]);
+
+        await scheduleNotification();
+        console.log('Daily notification scheduled successfully');
+
+        subscription =
+          Notifications.addNotificationResponseReceivedListener(
+            handleNotificationResponse
+          );
+      } catch (error) {
+        console.error('Error setting up notifications:', error);
+      }
+    };
+
+    setupNotifications();
+
+    return () => {
+      subscription?.remove();
+    };
+  }, []);
+
+};
+
+export default useDailyNotification;
