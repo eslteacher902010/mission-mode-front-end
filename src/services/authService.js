@@ -1,6 +1,8 @@
 // src/services/authService.js
 
-const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/auth`;
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+const BASE_URL = `${API_BASE_URL}/auth`;
+
 
 const decodeToken = (token) => {
   return JSON.parse(atob(token.split('.')[1]));
