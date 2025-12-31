@@ -5,7 +5,11 @@ const BASE_URL = `${API_BASE_URL}/badges`;
 const index = async () => {
   try {
     const res = await fetch(BASE_URL);
-    if (!res.ok) throw new Error('Failed to fetch badges');
+    if (!res.ok) {
+  console.warn("Badge fetch failed once:", res.status);
+  return [];
+}
+
     return res.json();
   } catch (err) {
     console.log(err);
