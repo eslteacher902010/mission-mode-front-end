@@ -1,0 +1,90 @@
+/* -----------------------
+   Demo Mission Card
+------------------------ */
+.demo-mission-card {
+  outline: 4px solid red;
+}
+
+.demo-details {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  padding: 1.5rem;
+}
+
+
+.demo-mission-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb; /* soft gray */
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+}
+
+/* Title */
+.demo-mission-card h2 {
+  letter-spacing: -0.01em;
+}
+
+/* -----------------------
+   Time Display
+------------------------ */
+
+.demo-mission-card .font-mono {
+  letter-spacing: 0.05em;
+}
+
+/* Friendly pre-start text */
+.demo-mission-card .text-gray-600 {
+  font-size: 0.95rem;
+}
+
+/* Completion message */
+.demo-mission-card .text-green-600 {
+  animation: fadeIn 0.4s ease-in;
+}
+
+/* -----------------------
+   Buttons (Demo Mission)
+------------------------ */
+
+.demo-mission-card button {
+  font-weight: 500;
+  border-radius: 10px;
+  padding: 0.6rem 1rem;
+  color: #ffffff;
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease,
+    background-color 0.12s ease;
+}
+
+/* Primary action (Start) */
+.demo-mission-card button.bg-black {
+  background-color: #111827;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+.demo-mission-card button.bg-black:hover {
+  background-color: #000000;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18);
+}
+
+/* Secondary action (Pause) */
+.demo-mission-card button.bg-gray-600 {
+  background-color: #4b5563;
+}
+
+.demo-mission-card button.bg-gray-600:hover {
+  background-color: #374151;
+}
+
+/* Disabled CTA */
+.demo-mission-card button:disabled {
+  background-color: #e5e7eb;
+  color: #6b7280;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}

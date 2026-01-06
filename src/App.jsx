@@ -14,6 +14,10 @@ import * as badgeService from "./services/badgeService";
 import PublicShowcase from './components/PublicShowcase/PublicShowcase';
 import WebReminders from './hooks/WebReminders.jsx';
 import { Routes, Route } from 'react-router-dom';
+import DemoMission from "./components/DemoMission/DemoMission.jsx";
+import * as authService from "./services/authService";
+
+
 
 import './App.css';
 
@@ -26,6 +30,8 @@ const App = () => {
   const completedCount = missions.filter(m => m.status === "completed").length;
   const earnedBadges = badges.filter(b => completedCount >= b.pointsRequired);
   const nextBadge = badges.find(b => completedCount < b.pointsRequired);
+  
+
 
 
   // Define fetchMissions BEFORE useEffect
@@ -37,6 +43,12 @@ const App = () => {
       console.error('Error fetching missions:', error);
     }
   };
+
+  useEffect(() => {
+  const currentUser = authService.getCurrentUser();
+  setUser(currentUser);
+}, []);
+
 
 
   useEffect(() => {
@@ -208,7 +220,26 @@ return (
         path="/"
         element={
           !user ? (
-            <PublicShowcase />
+            <>
+  <PublicShowcase />
+
+  {/* Scroll cue */}
+  <div
+    className="scroll-cue"
+    onClick={() =>
+      document
+        .getElementById("demo-mission")
+        ?.scrollIntoView({ behavior: "smooth" })
+    }
+  >
+    ↓
+  </div>
+
+  <div id="demo-mission">
+    <DemoMission />
+  </div>
+</>
+
           ) : (
             <div className="app-layout">
               <aside className="sidebar-container">

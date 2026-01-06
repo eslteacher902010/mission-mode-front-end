@@ -214,3 +214,23 @@ nav a {
 }
 
 
+.scroll-cue {
+  text-align: center;
+  font-size: 2rem;
+  color: #999;
+  margin: 1.5rem 0;
+  animation: bounce 1.6s infinite;
+  cursor: pointer;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(6px);
+    opacity: 1;
+  }
+}
+

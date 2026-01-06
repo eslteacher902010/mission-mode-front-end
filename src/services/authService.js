@@ -8,6 +8,19 @@ const decodeToken = (token) => {
   return JSON.parse(atob(token.split('.')[1]));
 };
 
+const getCurrentUser = () => {
+  const token = localStorage.getItem("token");
+  if (!token) return null;
+
+  try {
+    return decodeToken(token);
+  } catch (err) {
+    console.error("Invalid token", err);
+    return null;
+  }
+};
+
+
 const signUp = async (formData) => {
   try {
     const res = await fetch(`${BASE_URL}/sign-up`, {
@@ -62,4 +75,7 @@ const signIn = async (formData) => {
   }
 };
 
-export { signUp, signIn };
+
+
+export { signUp, signIn, getCurrentUser };
+
