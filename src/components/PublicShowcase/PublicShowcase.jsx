@@ -9,7 +9,7 @@ const accomplishments = [
   "Hit a personal productivity record"
 ];
 
-export default function PublicShowcase() {
+export default function PublicShowcase({ onDemoClick }) {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -24,9 +24,20 @@ export default function PublicShowcase() {
     <div className="showcase-overlay">
       <div className="showcase-card">
         <h2>Mission Mode</h2>
+
         <p className="showcase-text">
           {accomplishments[index]}
         </p>
+
+        {/* 👇 NEW BUTTON */}
+        <div className="demo-cta">
+          <button
+            className="demo-button"
+            onClick={onDemoClick}
+          >
+            ▶ Try a Demo Mission
+          </button>
+        </div>
 
         <p className="showcase-sub">
           Sign in to start tracking your own wins.

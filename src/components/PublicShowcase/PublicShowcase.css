@@ -45,3 +45,40 @@
     box-shadow: 0 0 0 rgba(100,108,255,0.2);
   }
 }
+
+.demo-button {
+  all: unset; /* 🔥 wipes browser defaults safely */
+  
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  padding: 0.7rem 1.6rem;
+  border-radius: 999px;
+
+  background: #111827; /* slate-900 */
+  color: white;
+  font-weight: 600;
+  font-size: 0.95rem;
+
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.demo-button:hover {
+  background: #000;
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+}
+
+.demo-button:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+}
+

@@ -30,6 +30,8 @@ const App = () => {
   const completedCount = missions.filter(m => m.status === "completed").length;
   const earnedBadges = badges.filter(b => completedCount >= b.pointsRequired);
   const nextBadge = badges.find(b => completedCount < b.pointsRequired);
+  const [showDemo, setShowDemo] = useState(false);
+
   
 
 
@@ -220,27 +222,39 @@ return (
         path="/"
         element={
           !user ? (
-            <>
-  <PublicShowcase />
+  <>
+    <PublicShowcase onDemoClick={() => setShowDemo(true)} />
+      
 
-  {/* Scroll cue */}
-  <div
-    className="scroll-cue"
-    onClick={() =>
-      document
-        .getElementById("demo-mission")
-        ?.scrollIntoView({ behavior: "smooth" })
-    }
-  >
-    ↓
-  </div>
+    {/* Scroll cue */}
+    <div
+      className="scroll-cue"
+      onClick={() =>
+        document
+          .getElementById("demo-mission")
+          ?.scrollIntoView({ behavior: "smooth" })
+      }
+    >
+      ↓
+    </div>
 
-  <div id="demo-mission">
+    {/* DEMO FLOATING PANEL */}
+{showDemo && (
+  <div className="demo-float">
     <DemoMission />
-  </div>
-</>
 
-          ) : (
+    <button
+      className="demo-close"
+      onClick={() => setShowDemo(false)}
+      aria-label="Close demo"
+    >
+      ✕
+    </button>
+  </div>
+)}
+  </>
+          )
+  : (
             <div className="app-layout">
               <aside className="sidebar-container">
                 <MissionList
