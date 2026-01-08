@@ -224,19 +224,7 @@ return (
           !user ? (
   <>
     <PublicShowcase onDemoClick={() => setShowDemo(true)} />
-      
-
-    {/* Scroll cue */}
-    <div
-      className="scroll-cue"
-      onClick={() =>
-        document
-          .getElementById("demo-mission")
-          ?.scrollIntoView({ behavior: "smooth" })
-      }
-    >
-      ↓
-    </div>
+  
 
     {/* DEMO FLOATING PANEL */}
 {showDemo && (
